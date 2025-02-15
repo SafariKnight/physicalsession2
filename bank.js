@@ -1,4 +1,12 @@
-function bankAccount(name, age, balance, city, street, buildingNumber, apartmentNumber) {
+function bankAccount(
+  name,
+  age,
+  balance,
+  city,
+  street,
+  buildingNumber,
+  apartmentNumber,
+) {
   return {
     name: name,
     age: age,
@@ -58,11 +66,24 @@ function bankAccount(name, age, balance, city, street, buildingNumber, apartment
 }
 
 async function tests() {
-  const testBankAccounts = bankAccount("Test", 16, 200, "New York", "Main st.", 10, 20);
+  const testBankAccounts = bankAccount(
+    "Test",
+    16,
+    200,
+    "New York",
+    "Main st.",
+    10,
+    20,
+  );
+  console.log("\tBefore")
+  testBankAccounts.accountInfo()
+  console.log(`Balance: ${testBankAccounts.balance}`);
+
+
+  console.log("\n\tAfter")
   await testBankAccounts.withdraw(300); // Should fail
   await testBankAccounts.withdraw(100); // Should Work
   await testBankAccounts.deposit(200);
-  console.log(`Balance: ${testBankAccounts.balance}`);
 }
 
 tests();
