@@ -20,6 +20,7 @@ function bankAccount(
 
     accountInfo: function () {
       console.log(`Name: ${this.name}`);
+      console.log(`Balance: ${this.balance}`)
     },
     balanceCompare: async function (amount) {
       console.log("Checking balance...");
