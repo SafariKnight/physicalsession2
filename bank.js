@@ -7,28 +7,27 @@ function bankAccount(name, age, balance, address) {
     accountInfo: function () {
       console.log(`Name: ${this.name}`);
     },
-    balanceCompare: async function (amount) {
-      console.log("Checking balance..."),
+    balanceCompare: function (amount) {
+      console.log("Checking balance...");
+      return new Promise((resolve, reject) => {
         setTimeout(() => {
           if (amount <= 0) {
-            throw new Error("Invalid Withdraw Amount");
+            reject(new Error("Invalid Withdraw Amount"));
           }
-          if (this.balance <= amount) {
-            throw new Error("Withdraw Amount Higher than Balance");
+          if (this.balance < amount) {
+            reject(new Error("Withdraw Amount Higher than Balance"));
           }
-          return true;
+          resolve(true);
         }, 1000);
+      });
     },
     withdraw: async function (money) {
       try {
-        if (this.balanceCompare(money)) {
-          this.balance -= money;
-          console.log(`Withdrawal successful. New Balance: ${this.balance}`);
-        } else {
-          console.log("Invalid withdrawal amount or insufficient balance.");
-        }
+        await this.balanceCompare(money);
+        this.balance -= money;
+        console.log(`Withdrawal successful. New Balance: ${this.balance}`);
       } catch (err) {
-        console.log(err.message)
+        console.log(err.message);
       }
     },
     deposit: function (amount) {
@@ -52,5 +51,5 @@ function bankAccount(name, age, balance, address) {
           console.log(message);
         });
     },
-  }
+  };
 }
