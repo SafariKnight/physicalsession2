@@ -4,5 +4,8 @@ function bankAccount(name, age, balance, address) {
     age: age,
     balance: balance,
     address: address,
+    accountInfo: function() {
+      console.log(`Name: ${this.name}`)
+    }
   }
 }
