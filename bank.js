@@ -31,5 +31,26 @@ function bankAccount(name, age, balance, address) {
         console.log(err.message)
       }
     },
-  };
+    deposit: function (amount) {
+      return new Promise((resolve, reject) => {
+        if (amount <= 0) {
+          reject("Invalid amount");
+        }
+        setTimeout(() => {
+          this.balance += amount;
+          resolve(amount);
+        }, 1000);
+      });
+    },
+    addAmount: function (amount) {
+      this.deposit(amount)
+        .then((amount) => {
+          console.log(`Amount Deposited: ${amount}`);
+          console.log(`New Balance: ${this.balance}`);
+        })
+        .catch((message) => {
+          console.log(message);
+        });
+    },
+  }
 }
